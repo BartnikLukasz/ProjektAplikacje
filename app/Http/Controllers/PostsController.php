@@ -41,6 +41,9 @@ class PostsController extends Controller
         if(\Auth::user()==null){
             return view('posts');
         }
+        $validated = $request->validate([
+        'content' => 'required|min:100|max:10000',
+        ]);
         session_start();
         $post = new Post();
         $post->user_id = \Auth::user()->id;
@@ -97,7 +100,7 @@ class PostsController extends Controller
         }
         $post->content = $request->message;
         if($post->save()) {
-            return redirect()->route('post');
+            return redirect()->route('posts');
         }
         return "Wystąpił błąd.";
     }

@@ -31,8 +31,12 @@ Route::get('/createComment','App\Http\Controllers\CommentsController@create')->n
 Route::post('/createComment','App\Http\Controllers\CommentsController@store')->name('storeComment');
 Route::get('/createImage','App\Http\Controllers\ImagesController@create')->name('createImage');
 Route::post('/createImage','App\Http\Controllers\ImagesController@store')->name('storeImage');
-
+Route::get('/user/{id}','App\Http\Controllers\UsersController@show')->name('user');
+Route::put('/updateDesc/{id}', 'App\Http\Controllers\UsersController@update')->name('updateDesc');
+Route::get('/regulamin','App\Http\Controllers\HomeController@regulamin')->name('regulamin')->withoutMiddleware(['auth']);
+Route::get('/contact','App\Http\Controllers\HomeController@kontakt')->name('contact');
 
 Auth::routes();
+Auth::routes(['regulamin'=>'false']);
 
 

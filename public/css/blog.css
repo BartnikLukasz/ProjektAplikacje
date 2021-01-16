@@ -19,9 +19,13 @@ body{
   color: #BEC4D0;
 }
 
-#headerImage{
+.headerImage{
     width: 700px;
     height: 450px;
+}
+
+#regulamin{
+    font-size: 1.6rem;
 }
 
 
@@ -35,7 +39,6 @@ textarea{
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
 }
 
 .display-4 {
@@ -55,15 +58,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-brand{
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .nav-item{
-    font-size: 1.5rem;
+  font-size: 1rem;
+}
+        
+.dropdown-item{
+  font-size: 0.9rem;
+ }
+        
+.nav-p-1{
+    font-size: 1.5rem
 }
 
-.dropdown-item{
-    font-size: 1.2rem;
+.nav-p-2{
+    font-size: 1.2rem
 }
 
 .card-img-right {
@@ -117,6 +128,18 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.2rem;
 }
 
+#addPost{
+    text-align: center;
+}
+
+#addButton{
+    font-size: 2rem;
+}
+
+#textReg{
+    color: #cccccc;
+}
+
 .loading-wrap{
     display: none;
 }
@@ -144,6 +167,24 @@ td{
 table{
     border: none;
 }
+
+    #posty{
+            background: url("http://localhost:8000/images/used/main_background3.jpg") no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            color: whitesmoke;
+        }
+        
+        #posty li{
+            font-size: 1.5rem;
+        }
+        
+        .user{
+            color: #333333;
+            font-size: 1.3rem;
+        }
 
 /*
  * Footer

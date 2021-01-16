@@ -25,4 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    
+    public function regulamin(){
+        return view('regulamin');
+    }
+    
+    public function kontakt(){
+        return view('contact');
+    }
 }

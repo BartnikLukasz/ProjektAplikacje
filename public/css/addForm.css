@@ -1,0 +1,21 @@
+            .title{
+                text-align: center;
+                background-color: transparent
+            }
+            body{
+                background: #313540;
+                color: #BEC4D0;
+            }
+            .table-container{
+                background: #313540;
+                color: #BEC4D0;
+                max-width: 900px;
+                margin: 0 auto;
+            }   
+            .box {
+                display: flex;
+                justify-content: center;
+            }
+            .box-footer{
+                float: right;
+            }
