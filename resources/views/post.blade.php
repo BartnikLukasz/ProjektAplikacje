@@ -1,17 +1,17 @@
 @include('layouts.navbar')
 <?php
     use Illuminate\Support\Facades\DB;
-    
+
     $comments = DB::table('posts')
         ->join('comments', 'posts.id', '=', 'comments.post_id')
         ->select('comments.*')
         ->where('comments.post_id', '=', $post->id)
         ->get();
-    
-    $images = DB::table('posts')
-            ->join('images', 'posts.id', '=', 'images.post_id')
+
+    $images = DB::table('galleries')
+            ->join('images', 'galleries.id', '=', 'images.gallery_id')
             ->select('images.*')
-            ->where('images.post_id', '=', $post->id)
+            ->where('images.gallery_id', '=', $gallery->id)
             ->get();
     $i=0;
     $j=0;
@@ -24,7 +24,7 @@
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    
+
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -94,34 +94,34 @@
                                 @endif
                                 <table>
                                     <tr>
-                                        <td>          
+                                        <td>
 
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p>{{$post->content}}</p>  
-                                        </td>    
+                                            <p>{{$post->content}}</p>
+                                        </td>
                                     </tr>
                                 </table>
                                 </div>
                 </div>
             </div>
         </div>
-        
+
         <br>
         @if($post->user_id == \Auth::user()->id)
                         <br />
                         <a href="{{ route('edit', $post) }}" class="btn btn-success btn-xs" title="Edytuj"> Edytuj
                         </a>
-            <a href="{{ route('delete', $post) }}" 
-               class="btn btn-danger btn-xs" 
-               onclick="return confirm('Jesteś pewien?')" 
+            <a href="{{ route('delete', $post) }}"
+               class="btn btn-danger btn-xs"
+               onclick="return confirm('Jesteś pewien?')"
                title="Skasuj"><i class="fa fa-trash-o"></i> Usuń
             </a>
             @endif
-            
-            <form class="form" action="{{ route('storeComment', $post) }}" id="comment-form" 
+
+            <form class="form" action="{{ route('storeComment', $post) }}" id="comment-form"
                    method="post" enctype="multipart/form-data" >
                {{ csrf_field() }}
                <div class="box">
@@ -133,7 +133,7 @@
                      <input type="hidden" id="postId" name="postId" value="{{$post->id}}">
                  </div>
                 </div>
-              <div class="box-footer"><button type="submit" class="btn btn-success">Dodaj</button> 
+              <div class="box-footer"><button type="submit" class="btn btn-success">Dodaj</button>
               </div>
              </form>
             <table class="table table-dark table-borderless">
@@ -154,19 +154,19 @@
                 </tr>
                 <tr>
                     <td>{{$comment->message}}</td>
-                    
+
                 </tr>
-            
+
                     @endforeach
              </tbody>
         </table>
         @endauth
-    </main>     
-  
+    </main>
+
     @guest
     <div class="col-md-12 text-center">
         <h1>Zaloguj się aby przejrzeć posty.</h1>
-    </div> 
-    @endguest       
+    </div>
+    @endguest
 </body>
 </html>
