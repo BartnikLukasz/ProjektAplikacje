@@ -29,7 +29,7 @@ Route::put('{id}', 'App\Http\Controllers\PostsController@update')->name('update'
 Route::get('/post/{id}','App\Http\Controllers\PostsController@show')->name('post');
 Route::get('/createComment','App\Http\Controllers\CommentsController@create')->name('createComment');
 Route::post('/createComment','App\Http\Controllers\CommentsController@store')->name('storeComment');
-Route::get('/createImage','App\Http\Controllers\ImagesController@create')->name('createImage');
+Route::get('/createImage/{postId}','App\Http\Controllers\ImagesController@create')->name('createImage');
 Route::post('/createImage','App\Http\Controllers\ImagesController@store')->name('storeImage');
 Route::get('/user/{id}','App\Http\Controllers\UsersController@show')->name('user');
 Route::put('/updateDesc/{id}', 'App\Http\Controllers\UsersController@update')->name('updateDesc');

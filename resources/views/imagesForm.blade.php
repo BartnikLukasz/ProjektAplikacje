@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Blog podróżniczy</title>
-        <link href="{{ asset('css/blog.css') }}" rel="stylesheet"> 
+        <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
@@ -14,7 +14,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
         <script> $('.file-upload').file_upload(); </script>
-        
+
         <link href="{{ asset('css/addForm.css') }}" rel="stylesheet">
     </head>
     <body>
@@ -32,7 +32,27 @@
             <div class="box box-primary ">
              <!-- /.box-header -->
              <!-- form start -->
-             <form action="{{ route('storeImage') }}" id="comment-form" 
+             <main class="container">
+                <div class="main-panel w-75 text-center" id="gallery">
+                    <h3 class="mb-4 text-center">{{ $post->title }}</h3>
+                    <div class="categories-container mb-2">
+                        <div id="image_preview" class="row">
+
+                            @foreach($post->images()->get() as $image)
+                            <div>
+                                <img class="preview-image" src="{{asset($image->url)}}" alt="Slajd">
+                                <p class="image-title text-center mt-2">{{$image->title}}</p>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @guest
+            <div class="col-md-12 text-center">
+                <h1>Zaloguj się aby przejrzeć posty.</h1>
+            </div>
+            @endguest
+             <form action="{{ route('storeImage') }}" id="comment-form"
                    method="post" enctype="multipart/form-data" >
                {{ csrf_field() }}
                <div class="box">
@@ -46,13 +66,13 @@
                         <input type="file" id="image" name="image" accept=".jpg, .jpeg" class="custom-file-input" id="customFile">
                         <label class="custom-file-label">Wybierz zdjęcie</label>
                     </div>
-                    
+
                    </div>
                  </div>
                 </div>
               <div class="box-footer">
                   <button type="submit" class="btn btn-danger" onclick="window.location='{{ route("posts") }}'">Zakończ dodawanie zdjęć</button>
-                  <button type="submit" class="btn btn-success">Dodaj zdjęcie</button> 
+                  <button type="submit" class="btn btn-success">Dodaj zdjęcie</button>
               </div>
              </form>
             </div>

@@ -51,7 +51,7 @@ class PostsController extends Controller
         $post->content = $request->content;
         if($post->save()){
             $_SESSION['postId'] = $post->id;
-            return redirect()->route('storeImage');
+            return redirect()->route('createImage', [$post->id]);
         }
         return "Wystąpił błąd";
     }
@@ -78,7 +78,7 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         if (\Auth::user()->id != $post->user_id) {
-            return back()->with(['success' => false, 'message_type' => 'danger', 
+            return back()->with(['success' => false, 'message_type' => 'danger',
                 'message' => 'Nie posiadasz uprawnień do przeprowadzenia tej operacji.']);
         }
         return view('postsEditForm', compact('post'));
@@ -115,14 +115,14 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         if(\Auth::user()->id != $post->user_id){
-            return back()->with(['success' => false, 'message_type' => 'danger', 
+            return back()->with(['success' => false, 'message_type' => 'danger',
                 'message' => 'Nie posiadasz uprawnień do przeprowadzenia tej operacji.']);
             }
         if($post->delete()){
-            return redirect()->route('posts')->with(['success' => true, 'message_type' => 'success', 
+            return redirect()->route('posts')->with(['success' => true, 'message_type' => 'success',
                 'message' => 'Pomyślnie skasowano post użytkownika '.$post->user->name.'.']);
         }
-        return back()->with(['success' => false, 'message_type' => 'danger', 
+        return back()->with(['success' => false, 'message_type' => 'danger',
             'message' => 'Wystąpił błąd podczas kasowania postu użytkownika '.$post->user->name.'. Spróbuj później.']);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Image;
+use App\Models\Post;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class ImagesController extends Controller
@@ -24,10 +25,11 @@ class ImagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($postId)
     {
         $image = new Image();
-        return view('imagesForm', compact('image'));
+        $post = Post::find($postId);
+        return view('imagesForm', compact('image', 'post'));
     }
 
     /**
@@ -45,7 +47,6 @@ class ImagesController extends Controller
         $pictureNr = rand(0,1000000);
         $image = new Image();
         $image->user_id = \Auth::user()->id;
-        //$image->post_id = 1;
         $image->post_id = $_SESSION['postId'];
         $image->title = $request->imageTitle;
         $image->description = $request->imageDesc;
@@ -53,12 +54,9 @@ class ImagesController extends Controller
         $path = str_replace('\\', '/', $path);
         $image->url = $path;
         move_uploaded_file($_FILES["image"]["tmp_name"], public_path().$image->url);
-        //$tempImage = imagecreatefromjpeg(public_path().$image->url);
-        //$croppedImage = imagecrop($tempImage, array('x'=>600, 'y'=>400, 'width' => 600, 'height' => 400));
-        //imagejpeg($croppedImage, public_path().'/cropped'.$image->url);
-        
+
         if($image->save()){
-            return redirect()->route('storeImage');
+            return redirect()->route('createImage', [$image->post_id]);
         }
         return "Wystąpił błąd";
     }

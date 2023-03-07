@@ -8,7 +8,7 @@
             ->orderByDesc('created_at')
             ->get();
     $i=0;
-    
+
     ?>
 <head>
     <title>Blog podróżniczy</title>
@@ -16,7 +16,7 @@
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    
+
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -30,7 +30,7 @@
 </head>
 <body id="posty">
     <main class="container">
-        
+
         @auth
         <div class="title">
             <h1>Posty</h1>
@@ -38,27 +38,27 @@
         <div class="row">
             <div class="col-md-8">
                 @foreach($posts as $post)
-                <?php 
+                <?php
                     $path = DB::table('posts')
                                 ->join('images', 'posts.id', '=', 'images.post_id')
                                 ->select('images.url')
                                 ->where('images.post_id', '=', $post->id)
                                 ->get();
-                    
+
                     if(strlen($post->content)>100){
                         $contentPreview = substr($post->content, 0, 100);
                         $contentPreview = substr_replace($contentPreview, "...", -3);
                     }
-                    
+
                     ?>
-                
-                <div class="row flex-md-row mb-4 shadow-sm h-md-450 position-relative">
+
+                <div class="row post-card flex-md-row mb-4 shadow-sm h-md-450 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="mb-0">{{$post->title}}</h3>
-                            
+                            <h3 class="mb-0 blog-post-title">{{$post->title}}</h3>
+
                                 <div class="mb-1 ">{{$post->created_at}}</div>
                                 by <a class="user" href="{{ route('user', $post->user->id) }}">{{$post->user->name}}</a>
-                                <table style="transform: rotate(0);">
+                                <table class = "header-table">
                                     <tr>
                                         <td>
                                             @if(empty($path[0])==false)
@@ -66,17 +66,17 @@
                                             @endif
                                         </td>
                                     </tr>
-                                    <tr>    
+                                    <tr>
                                         <td>
-                                            <p class="mb-auto"><?php if(strlen($post->content)>100){ echo $contentPreview; } else{echo $post->content;}?></p>
+                                            <p class="mb-auto blog-post-content"><?php if(strlen($post->content)>200){ echo $contentPreview; } else{echo $post->content;}?></p>
                                             <a href="{{ route('post', $post) }}" class="stretched-link">Czytaj dalej</a>
-                                        </td>    
+                                        </td>
                                     </tr>
                                 </table>
                                 </div>
                 </div>
                 @endforeach
-                
+
             </div>
             <div class="col-md-4">
       <div id="addPost" class="p-4 mb-3 rounded">
@@ -106,12 +106,12 @@
     </div>
         </div>
         @endauth
-    </main>     
-  
+    </main>
+
     @guest
     <div class="col-md-12 text-center">
         <h1>Zaloguj się aby przejrzeć posty.</h1>
-    </div>    
-    @endguest       
+    </div>
+    @endguest
 </body>
 </html>
