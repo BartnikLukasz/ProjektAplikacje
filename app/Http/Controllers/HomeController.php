@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -25,12 +26,13 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    
+
     public function regulamin(){
         return view('regulamin');
     }
-    
+
     public function kontakt(){
-        return view('contact');
+        $users = User::orderBy('created_at', 'desc')->paginate(20);
+        return view('contact', compact('users'));
     }
 }

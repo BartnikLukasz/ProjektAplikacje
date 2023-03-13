@@ -24,4 +24,10 @@
                 height: 7rem;
                 width: 14rem;
                 padding-right: 1rem;
+                padding-top: 1rem;
+
+            }
+
+            #file-input {
+                display: none;
             }

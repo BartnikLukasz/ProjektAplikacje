@@ -19,7 +19,6 @@
     </head>
     <body>
         <div class="table-container">
-            <div class="title"> <h3>Posty</h3> </div>
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -33,14 +32,14 @@
              <!-- /.box-header -->
              <!-- form start -->
              <main class="container">
+                <h3 class="mb-1 text-center">Dodaj zdjęcia</h3>
                 <div class="main-panel w-75 text-center" id="gallery">
-                    <h3 class="mb-4 text-center">{{ $post->title }}</h3>
                     <div class="categories-container mb-2">
                         <div id="image_preview" class="row">
 
                             @foreach($post->images()->get() as $image)
                             <div>
-                                <img class="preview-image" src="{{asset($image->url)}}" alt="Slajd">
+                                <img class="preview-image" src="{{asset($image->url)}}" alt="Dodane">
                                 <p class="image-title text-center mt-2">{{$image->title}}</p>
                             </div>
                             @endforeach
@@ -52,7 +51,7 @@
                 <h1>Zaloguj się aby przejrzeć posty.</h1>
             </div>
             @endguest
-             <form action="{{ route('storeImage') }}" id="comment-form"
+             <form action="{{ route('storeImage') }}" id="image-form"
                    method="post" enctype="multipart/form-data" >
                {{ csrf_field() }}
                <div class="box">
@@ -63,19 +62,21 @@
                     <label><b>Opis zdjęcia</b></label> <br>
                     <textarea name="imageDesc" id="imageDesc" cols="40" rows="2" required></textarea>
                     <div class="custom-file">
-                        <input type="file" id="image" name="image" accept=".jpg, .jpeg" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label">Wybierz zdjęcie</label>
+                        <input type="file" name="image" class="form-control" id="file-input" accept="image/*"
+                           onchange="submitForm()" >
                     </div>
-
+                    <button type="submit" class="btn btn-danger" onclick="window.location='{{ route("posts") }}'"><label>Zakończ dodawanie zdjęć</label></button>
+                    <button type="button" class="btn btn-success"><label for="file-input">Dodaj zdjęcie</label></button>
                    </div>
                  </div>
                 </div>
-              <div class="box-footer">
-                  <button type="submit" class="btn btn-danger" onclick="window.location='{{ route("posts") }}'">Zakończ dodawanie zdjęć</button>
-                  <button type="submit" class="btn btn-success">Dodaj zdjęcie</button>
-              </div>
              </form>
             </div>
         </div>
+        <script type="text/javascript">
+            function submitForm() {
+                document.getElementById("image-form").submit();
+            }
+        </script>
     </body>
 </html>

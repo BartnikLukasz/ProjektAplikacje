@@ -197,9 +197,11 @@ table{
         }
 
         .user{
-            color: #333333;
+            color: #8d8d8d;
             font-size: 1.3rem;
         }
+
+.note-editor { background-color: rgb(33, 33, 33) !important;}
 
 /*
  * Footer

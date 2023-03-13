@@ -1,21 +1,4 @@
 @include('layouts.navbar')
-<?php
-    use Illuminate\Support\Facades\DB;
-    
-    $comments = DB::table('posts')
-        ->join('comments', 'posts.id', '=', 'comments.post_id')
-        ->select('comments.*')
-        ->where('comments.post_id', '=', $post->id)
-        ->get();
-    
-    $images = DB::table('posts')
-            ->join('images', 'posts.id', '=', 'images.post_id')
-            ->select('images.*')
-            ->where('images.post_id', '=', $post->id)
-            ->get();
-    $i=0;
-    $j=0;
-        ?>
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -24,7 +7,7 @@
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    
+
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -45,6 +28,10 @@
 </head>
 <body>
     <main class="container">
+        @php
+            $i=0;
+            $j=0;
+        @endphp
 
         @auth
         <div class="title">
@@ -63,7 +50,7 @@
       </ol>
   <div class="carousel-inner">
       @foreach($images as $image)
-      <?php
+      @php
       if($j==0) { echo '<div class="carousel-item active">
       <img class="d-block" src="'.asset($image->url).'" style="height: 600px; width: 1200px" alt="Slajd">
       <div class="carousel-caption">
@@ -79,7 +66,7 @@
       </div>
     </div>';}
     $j++;
-      ?>
+      @endphp
       @endforeach
   </div>
   <a class="carousel-control-prev" href="#karuzela" role="button" data-slide="prev">
@@ -94,34 +81,34 @@
                                 @endif
                                 <table>
                                     <tr>
-                                        <td>          
+                                        <td>
 
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p>{{$post->content}}</p>  
-                                        </td>    
+                                            <p class="mb-auto blog-post-content">{!! $post->content !!}</p>
+                                        </td>
                                     </tr>
                                 </table>
                                 </div>
                 </div>
             </div>
         </div>
-        
+
         <br>
         @if($post->user_id == \Auth::user()->id)
                         <br />
                         <a href="{{ route('edit', $post) }}" class="btn btn-success btn-xs" title="Edytuj"> Edytuj
                         </a>
-            <a href="{{ route('delete', $post) }}" 
-               class="btn btn-danger btn-xs" 
-               onclick="return confirm('Jesteś pewien?')" 
+            <a href="{{ route('delete', $post) }}"
+               class="btn btn-danger btn-xs"
+               onclick="return confirm('Jesteś pewien?')"
                title="Skasuj"><i class="fa fa-trash-o"></i> Usuń
             </a>
             @endif
-            
-            <form class="form" action="{{ route('storeComment', $post) }}" id="comment-form" 
+
+            <form class="form" action="{{ route('storeComment', $post) }}" id="comment-form"
                    method="post" enctype="multipart/form-data" >
                {{ csrf_field() }}
                <div class="box">
@@ -133,7 +120,7 @@
                      <input type="hidden" id="postId" name="postId" value="{{$post->id}}">
                  </div>
                 </div>
-              <div class="box-footer"><button type="submit" class="btn btn-success">Dodaj</button> 
+              <div class="box-footer"><button type="submit" class="btn btn-success">Dodaj</button>
               </div>
              </form>
             <table class="table table-dark table-borderless">
@@ -144,29 +131,30 @@
             </thead>
             <tbody>
                 @foreach($comments as $comment)
-                <?php $userName = DB::table('users')
-                                ->join('comments', 'users.id', '=', 'comments.user_id')
-                                ->select('users.name')
-                                ->where('comments.user_id', '=', $comment->user_id)
-                                ->get() ?>
+                @php
+                    $username = "";
+                    foreach($users as $user) {
+                        if($user->id == $comment->user_id) {
+                            $username = $user->name;
+                        }
+                    }
+                @endphp
                 <tr>
-                    <td><div id="commentInfo">{{$userName[0]->name}} at <div class="mb-1 text-muted">{{$comment->created_at}}</div></div></td>
+                    <td><div id="commentInfo">{{$username}} at <div class="mb-1 text-muted">{{$comment->created_at}}</div></div>
+                        {{$comment->message}}
+                    </td>
                 </tr>
-                <tr>
-                    <td>{{$comment->message}}</td>
-                    
-                </tr>
-            
+
                     @endforeach
              </tbody>
         </table>
         @endauth
-    </main>     
-  
+    </main>
+
     @guest
     <div class="col-md-12 text-center">
         <h1>Zaloguj się aby przejrzeć posty.</h1>
-    </div> 
-    @endguest       
+    </div>
+    @endguest
 </body>
 </html>

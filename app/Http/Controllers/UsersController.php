@@ -13,7 +13,8 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $posts = Post::orderBy('created_at', 'asc')->get();
-        return view('user', compact('user','posts'));
+        $images = $user->images()->get();
+        return view('user', compact('user','posts', 'images'));
     }
-    
+
 }

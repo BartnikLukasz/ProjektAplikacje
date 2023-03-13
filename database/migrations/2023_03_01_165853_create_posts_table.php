@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
                     ->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->text('title');
             $table->text('content');
+            $table->text('content_preview')->nullable();
             $table->timestamps();
         });
     }

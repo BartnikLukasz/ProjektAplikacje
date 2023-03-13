@@ -1,18 +1,9 @@
 @include('layouts.navbar')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-        <?php
-    use Illuminate\Support\Facades\DB;
-    $users = DB::table('users')
-            ->select('users.*')
-            ->orderByDesc('created_at')
-            ->get();
-    $i=0;
-    
-    ?>
 <head>
     <title>Blog podóżniczy</title>
-    
+
 <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
@@ -21,14 +12,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
-<link href="{{ asset('css/blog.css') }}" rel="stylesheet">   
+<link href="{{ asset('css/blog.css') }}" rel="stylesheet">
 </head>
 <body>
     <main class="container">
         <div class="title">
             <h1>Kontakt</h2>
         </div>
-        
+
         <div class="row">
             <div class="col-md-8">
                 <div class="row g-0 flex-md-row mb-4 shadow-sm h-md-1000 position-relative">
@@ -68,9 +59,10 @@
       <div class="p-4 mb-3 bg-dark rounded">
         <h3>Nowi użytkownicy</h3>
         <ol class="list-unstyled mb-0">
+            @php($i = 0)
             @while($i<10 && $i<$users->count())
           <li><a href="{{ route('user', $users[$i]->id) }}">{{$users[$i]->name}}</a></li>
-          <?php $i++ ?>
+          @php($i++)
           @endwhile
         </ol>
       </div>
@@ -87,7 +79,7 @@
       </div>
     </div>
         </div>
-        
-    </main>     
+
+    </main>
 </body>
 </html>

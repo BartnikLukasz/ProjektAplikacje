@@ -1,15 +1,6 @@
 @include('layouts.navbar')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <?php
-    use Illuminate\Support\Facades\DB;
-    $users = DB::table('users')
-            ->select('users.*')
-            ->orderByDesc('created_at')
-            ->get();
-    $i=0;
-
-    ?>
 <head>
     <title>Blog podróżniczy</title>
 <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/">
@@ -32,25 +23,10 @@
     <main class="container">
 
         @auth
-        <div class="title">
-            <h1>Posty</h1>
-        </div>
         <div class="row">
             <div class="col-md-8">
                 @foreach($posts as $post)
-                <?php
-                    $path = DB::table('posts')
-                                ->join('images', 'posts.id', '=', 'images.post_id')
-                                ->select('images.url')
-                                ->where('images.post_id', '=', $post->id)
-                                ->get();
-
-                    if(strlen($post->content)>100){
-                        $contentPreview = substr($post->content, 0, 100);
-                        $contentPreview = substr_replace($contentPreview, "...", -3);
-                    }
-
-                    ?>
+                    @php($path = $post->images()->first())
 
                 <div class="row post-card flex-md-row mb-4 shadow-sm h-md-450 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
@@ -61,14 +37,16 @@
                                 <table class = "header-table">
                                     <tr>
                                         <td>
-                                            @if(empty($path[0])==false)
-                                            <img src="{{ asset($path[0]->url) }}" class="headerImage"  alt="Zdjęcie postu"/>
+                                            @if(empty($path)==false)
+                                            <img src="{{ asset($path->url) }}" class="headerImage"  alt="Zdjęcie postu"/>
                                             @endif
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p class="mb-auto blog-post-content"><?php if(strlen($post->content)>200){ echo $contentPreview; } else{echo $post->content;}?></p>
+                                            <p class="mb-auto blog-post-content">
+                                                {{$post->content_preview}}
+                                            </p>
                                             <a href="{{ route('post', $post) }}" class="stretched-link">Czytaj dalej</a>
                                         </td>
                                     </tr>
@@ -83,12 +61,13 @@
         <a href="{{ route('store') }}" id="addButton" class="btn btn-primary btn-dark btn-lg">Dodaj post</a>
       </div>
 
+      @php($i=0)
       <div class="p-4 mb-3 bg-dark rounded">
         <h3>Nowi użytkownicy</h3>
         <ol class="list-unstyled mb-0">
             @while($i<10 && $i<$users->count())
           <li><a href="{{ route('user', $users[$i]->id) }}">{{$users[$i]->name}}</a></li>
-          <?php $i++ ?>
+          @php($i++)
           @endwhile
         </ol>
       </div>
