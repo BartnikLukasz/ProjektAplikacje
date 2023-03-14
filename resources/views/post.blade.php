@@ -1,4 +1,3 @@
-@include('layouts.navbar')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -27,6 +26,7 @@
     <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
 </head>
 <body>
+    @include('layouts.navbar')
     <main class="container">
         @php
             $i=0;
@@ -86,8 +86,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <p class="mb-auto blog-post-content">{!! $post->content !!}</p>
+                                        <td class="mb-auto blog-post-content">
+                                            {!! $post->content !!}
                                         </td>
                                     </tr>
                                 </table>
@@ -96,9 +96,7 @@
             </div>
         </div>
 
-        <br>
         @if($post->user_id == \Auth::user()->id)
-                        <br />
                         <a href="{{ route('edit', $post) }}" class="btn btn-success btn-xs" title="Edytuj"> Edytuj
                         </a>
             <a href="{{ route('delete', $post) }}"

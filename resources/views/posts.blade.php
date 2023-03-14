@@ -1,4 +1,3 @@
-@include('layouts.navbar')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -20,6 +19,7 @@
     <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
 </head>
 <body id="posty">
+    @include('layouts.navbar')
     <main class="container">
 
         @auth
@@ -38,7 +38,7 @@
                                     <tr>
                                         <td>
                                             @if(empty($path)==false)
-                                            <img src="{{ asset($path->url) }}" class="headerImage"  alt="Zdjęcie postu"/>
+                                            <img src="{{ asset($path->url) }}" class="headerImage"  alt="Zdjęcie postu">
                                             @endif
                                         </td>
                                     </tr>
@@ -76,9 +76,9 @@
         <h3>Znajdziesz nas na:</h3>
         <ol class="list-unstyled">
             <li>
-                <a href="https://www.facebook.com/"><img src="{{asset('/images/used/facebook_icon.png')}}" alt="Facebook"/></a>
-                <a href="https://twitter.com/"><img src="{{asset('/images/used/twitter_icon.png')}}" alt="Facebook"/></a>
-                <a href="https://www.instagram.com/"><img src="{{asset('/images/used/instagram_icon.png')}}" alt="Facebook"/></a>
+                <a href="https://www.facebook.com/"><img src="{{asset('/images/used/facebook_icon.png')}}" alt="Facebook"></a>
+                <a href="https://twitter.com/"><img src="{{asset('/images/used/twitter_icon.png')}}" alt="Facebook"></a>
+                <a href="https://www.instagram.com/"><img src="{{asset('/images/used/instagram_icon.png')}}" alt="Facebook"></a>
             </li>
         </ol>
       </div>

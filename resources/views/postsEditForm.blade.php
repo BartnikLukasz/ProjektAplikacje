@@ -1,4 +1,3 @@
-@include('layouts.navbar')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -16,22 +15,21 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
 <body>
+    @include('layouts.navbar')
     <main class="container">
         <div class="row">
             <div class="col-md-12">
                     <div class="row g-0 flex-md-row mb-4 shadow-sm h-md-1000 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
-                                <form role="form" class="form" role="form" id="comment-form" method="post" enctype="multipart/form-data"
+                                <form class="form" id="comment-form" method="post" enctype="multipart/form-data"
       action="{{ route('update', $post) }}">{{ csrf_field() }}
     <input name="_method" type="hidden" value="PUT">
     <div class="box">
         <div class="box-body">
             <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}" id="roles_box">
-                <label>
                     <h1>Treść</h1>
-                </label>
                 <br>
-                <textarea name="content" id="summernote" name="editordata" class="custom-toolbar" required>{{ $post->content}}</textarea>
+                <textarea name="content" id="summernote" class="custom-toolbar" required>{{ $post->content}}</textarea>
             </div>
         </div>
     </div>

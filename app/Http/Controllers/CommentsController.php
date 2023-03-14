@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Services\CommentService;
 
 class CommentsController extends Controller
 {
@@ -40,11 +41,8 @@ class CommentsController extends Controller
         if(\Auth::user()==null){
             return view('comments');
         }
-        $comment = new Comment();
-        $comment->user_id = \Auth::user()->id;
-        $comment->post_id = $request->postId;
-        $comment->message = $request->message;
-        if($comment->save()){
+
+        if(CommentService::saveComment($request)){
             return redirect()->route('post', $request->postId);
         }
         return "Wystąpił błąd";

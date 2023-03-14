@@ -1,4 +1,3 @@
-@include('layouts.navbar')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -20,6 +19,7 @@
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     </head>
     <body>
+        @include('layouts.navbar')
         <div class="table-container">
             <div class="title"> <h1>Dodaj post</h1> </div>
             @if ($errors->any())

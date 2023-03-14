@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Image;
 use App\Models\Post;
 use Symfony\Component\HttpFoundation\Session\Session;
+use App\Services\ImageService;
 
 class ImagesController extends Controller
 {
@@ -43,19 +44,8 @@ class ImagesController extends Controller
         if(\Auth::user()==null){
             return view('posts');
         }
-        session_start();
-        $pictureNr = rand(0,1000000);
-        $image = new Image();
-        $image->user_id = \Auth::user()->id;
-        $image->post_id = $_SESSION['postId'];
-        $image->title = $request->imageTitle;
-        $image->description = $request->imageDesc;
-        $path = '/images/'.$image->user_id.'_'.$image->post_id.'_'.$pictureNr.'.jpg';
-        $path = str_replace('\\', '/', $path);
-        $image->url = $path;
-        move_uploaded_file($_FILES["image"]["tmp_name"], public_path().$image->url);
-
-        if($image->save()){
+        $image = ImageService::saveImage($request);
+        if($image != false){
             return redirect()->route('createImage', [$image->post_id]);
         }
         return "Wystąpił błąd";

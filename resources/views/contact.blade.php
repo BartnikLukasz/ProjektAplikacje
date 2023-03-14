@@ -1,4 +1,3 @@
-@include('layouts.navbar')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -15,9 +14,10 @@
 <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
 </head>
 <body>
+    @include('layouts.navbar')
     <main class="container">
         <div class="title">
-            <h1>Kontakt</h2>
+            <h1>Kontakt</h1>
         </div>
 
         <div class="row">
@@ -31,9 +31,9 @@
                                                          Telefon: 123456789</p>
                                 </div>
                                 <div class="card-body">
-                                    <a href="https://www.facebook.com/"><img src="{{asset('/images/used/facebook_icon.png')}}" alt="Facebook"/></a>
-                                    <a href="https://twitter.com/"><img src="{{asset('/images/used/twitter_icon.png')}}" alt="Facebook"/></a>
-                                    <a href="https://www.instagram.com/"><img src="{{asset('/images/used/instagram_icon.png')}}" alt="Facebook"/></a>
+                                    <a href="https://www.facebook.com/"><img src="{{asset('/images/used/facebook_icon.png')}}" alt="Facebook"></a>
+                                    <a href="https://twitter.com/"><img src="{{asset('/images/used/twitter_icon.png')}}" alt="Facebook"></a>
+                                    <a href="https://www.instagram.com/"><img src="{{asset('/images/used/instagram_icon.png')}}" alt="Facebook"></a>
                                 </div>
                             </div>
                         <div class="card bg-dark" style="width: 34rem;">
@@ -43,9 +43,9 @@
                                                          Telefon: 123456789</p>
                                 </div>
                                 <div class="card-body">
-                                    <a href="https://www.facebook.com/"><img src="{{asset('/images/used/facebook_icon.png')}}" alt="Facebook"/></a>
-                                    <a href="https://twitter.com/"><img src="{{asset('/images/used/twitter_icon.png')}}" alt="Facebook"/></a>
-                                    <a href="https://www.instagram.com/"><img src="{{asset('/images/used/instagram_icon.png')}}" alt="Facebook"/></a>
+                                    <a href="https://www.facebook.com/"><img src="{{asset('/images/used/facebook_icon.png')}}" alt="Facebook"></a>
+                                    <a href="https://twitter.com/"><img src="{{asset('/images/used/twitter_icon.png')}}" alt="Facebook"></a>
+                                    <a href="https://www.instagram.com/"><img src="{{asset('/images/used/instagram_icon.png')}}" alt="Facebook"></a>
                                 </div>
                             </div>
                     <p id="regulamin"><strong>Oficjalny email bloga: bp@email.com</strong></p>
@@ -71,9 +71,9 @@
         <h3>Znajdziesz nas na:</h3>
         <ol class="list-unstyled">
             <li>
-                <a href="https://www.facebook.com/"><img src="{{asset('/images/used/facebook_icon.png')}}" alt="Facebook"/></a>
-                <a href="https://twitter.com/"><img src="{{asset('/images/used/twitter_icon.png')}}" alt="Facebook"/></a>
-                <a href="https://www.instagram.com/"><img src="{{asset('/images/used/instagram_icon.png')}}" alt="Facebook"/></a>
+                <a href="https://www.facebook.com/"><img src="{{asset('/images/used/facebook_icon.png')}}" alt="Facebook"></a>
+                <a href="https://twitter.com/"><img src="{{asset('/images/used/twitter_icon.png')}}" alt="Facebook"></a>
+                <a href="https://www.instagram.com/"><img src="{{asset('/images/used/instagram_icon.png')}}" alt="Facebook"></a>
             </li>
         </ol>
       </div>

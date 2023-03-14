@@ -1,4 +1,3 @@
-@include('layouts.navbar')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -18,6 +17,7 @@
         <link href="{{ asset('css/addForm.css') }}" rel="stylesheet">
     </head>
     <body>
+        @include('layouts.navbar')
         <div class="table-container">
             @if ($errors->any())
             <div class="alert alert-danger">

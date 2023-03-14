@@ -6,15 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Description;
+use App\Services\UserService;
 
 class UsersController extends Controller
 {
     public function show($id)
     {
-        $user = User::find($id);
-        $posts = Post::orderBy('created_at', 'asc')->get();
-        $images = $user->images()->get();
-        return view('user', compact('user','posts', 'images'));
+        return view('user', UserService::compactForShow($id));
     }
 
 }
