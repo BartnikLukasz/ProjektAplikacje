@@ -3,37 +3,36 @@
             border: none;
             font-size: 2rem;
         }
-        
+
         .navbar-brand{
             font-size: 1.3rem;
         }
-        
+
         .nav-item{
             font-size: 1rem;
         }
-        
+
         .dropdown-item{
             font-size: 0.9rem;
         }
-        
+
         body{
-            background: url("http://localhost:8000/images/used/main_background1.jpg") no-repeat center center fixed; 
+            background: url("http://localhost:8000/images/used/main_background1.jpg") no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
         }
-        
+
         .card{
             background: rgba(0, 0, 0, 0);
             border: none;
             text-align: center;
             color: lightgrey;
         }
-        
+
         .welcomeText{
             font-size: 1.3rem;
-            padding-top: 15%;
             color:#eeeeee;
         }
         .regText{
@@ -41,15 +40,12 @@
             padding-top: 5%;
             color:#eeeeee;
         }
-        
+
         #authButton:hover{
             background: #666666;
         }
-        
+
         #about{
             font-size: 1.3rem;
             color:#eeeeee;
-        }
-        #aboutTitle{
-            padding-top: 20%;
         }

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Rejestracja') }}</div>
 
-                <div class="card-body text-white">
+                <div class="card-body post-card text-white">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -47,7 +47,7 @@
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong class="bg-light">{{ $message }}</strong>
+                                        <strong class="">{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -60,12 +60,12 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-                        
+
                         <input type="checkbox" name="terms" id="terms" required="">Akceptuję <a id="textReg" href="{{route('regulamin')}}">regulamin</a>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-dark">
                                     {{ __('Zarejestruj') }}
                                 </button>
                             </div>
