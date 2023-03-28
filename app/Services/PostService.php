@@ -79,7 +79,8 @@ class PostService {
     }
 
     private static function sanitize($content) {
-        $SCRIPT_REGEX = "/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/i";
-        return preg_replace($SCRIPT_REGEX, "", $content);
+        $SCRIPT_REGEX = '/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/i';
+        $SCRIPT_REGEX_SANITIZED = '/&lt;script.*&lt;\/script&gt;/i';
+        return preg_replace($SCRIPT_REGEX_SANITIZED, "", preg_replace($SCRIPT_REGEX, "", $content));
     }
 }
