@@ -35,4 +35,10 @@ class HomeController extends Controller
         $users = User::orderBy('created_at', 'desc')->paginate(20);
         return view('contact', compact('users'));
     }
+
+    public function kontinfoakt(){
+        $users = User::orderBy('created_at', 'desc')->paginate(20);
+        return view('info');
+    }
+
 }

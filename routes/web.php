@@ -35,6 +35,7 @@ Route::get('/user/{id}','App\Http\Controllers\UsersController@show')->name('user
 Route::put('/updateDesc/{id}', 'App\Http\Controllers\UsersController@update')->name('updateDesc');
 Route::get('/regulamin','App\Http\Controllers\HomeController@regulamin')->name('regulamin')->withoutMiddleware(['auth']);
 Route::get('/contact','App\Http\Controllers\HomeController@kontakt')->name('contact');
+Route::get('/info','App\Http\Controllers\HomeController@info')->name('info');
 
 Auth::routes();
 Auth::routes(['regulamin'=>'false']);

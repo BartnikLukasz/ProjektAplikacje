@@ -4,6 +4,7 @@
                 <a class="navbar-brand" href="{{ route('posts') }}">Posty</a>
                 <a class="navbar-brand" href="{{ route('regulamin') }}">Regulamin</a>
                 <a class="navbar-brand" href="{{ route('contact') }}">Kontakt</a>
+                <a class="navbar-brand" href="{{ route('info') }}">Informacje o projekcie</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
